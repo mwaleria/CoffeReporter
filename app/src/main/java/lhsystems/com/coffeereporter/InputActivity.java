@@ -18,6 +18,7 @@ public class InputActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+        this.deleteDatabase("COFFEE_REP");
     }
 
 
