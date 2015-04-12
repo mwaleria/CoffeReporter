@@ -41,10 +41,10 @@ public class CoffeeDao  extends AbstractDao<Coffee> {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_COFEES_TABLE = "CREATE TABLE " + Coffee.TABLE_NAME + "("
+        String CREATE_COFFEES_TABLE = "CREATE TABLE " + Coffee.TABLE_NAME + "("
                 + Coffee.COLUMNS[0] + " INTEGER PRIMARY KEY AUTOINCREMENT," + Coffee.COLUMNS[1] + " TEXT,"
                 +  Coffee.COLUMNS[2] + " REAL)";
-        db.execSQL(CREATE_COFEES_TABLE);
+        db.execSQL(CREATE_COFFEES_TABLE);
     }
 
     @Override
