@@ -63,4 +63,16 @@ public class CoffeePortionDao extends AbstractDao<CoffeePortion> {
         return this.create(entity,timestamp);
     }
 
+    public long getCoffeePortionsForUserInTime(final long userId,final DateTime dateFrom,final DateTime dateTo) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT count(id) from "+ CoffeePortion.TABLE_NAME + " WHERE userId = ? and timestamp > ? and timestamp <  ?";
+        String[] params = new String[3];
+        params[0]  = String.valueOf(userId);
+        params[1] = String.valueOf(dateFrom.getMillis());
+        params[2] = String.valueOf(dateTo.getMillis());
+        Cursor cursor = db.rawQuery(query,params);
+        cursor.moveToFirst();
+        return cursor.getLong(0);
+    }
+
 }

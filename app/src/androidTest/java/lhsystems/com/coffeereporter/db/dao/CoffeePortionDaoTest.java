@@ -37,4 +37,23 @@ public class CoffeePortionDaoTest extends AndroidTestCase {
         assertEquals(1l,coffeePortionFromDb.getUserId());
         assertEquals(dt.getMillis(),coffeePortionFromDb.getTimestamp());
     }
+
+    public void testGetCoffeePortionsForUserInTime() {
+        CoffeePortion  coffeePortion = new CoffeePortion();
+        coffeePortion.setCoffeeId(1l);
+        coffeePortion.setUserId(1l);
+        DateTime dt = new DateTime(2015,4,12,15,21,0);
+        coffeePortionDao.create(coffeePortion , dt.plusDays(1).getMillis());
+        coffeePortionDao.create(coffeePortion , dt.getMillis());
+        long count = coffeePortionDao.getCoffeePortionsForUserInTime(1l,dt.minusSeconds(1),dt.plusDays(2));
+        assertEquals(2,count);
+        count = coffeePortionDao.getCoffeePortionsForUserInTime(1l,dt.minusSeconds(1),dt.plusHours(2));
+        assertEquals(1,count);
+        count = coffeePortionDao.getCoffeePortionsForUserInTime(1l,dt.plusHours(4),dt.plusDays(2));
+        assertEquals(1,count);
+        count = coffeePortionDao.getCoffeePortionsForUserInTime(1l,dt.plusDays(2),dt.plusDays(4));
+        assertEquals(0,count);
+        count = coffeePortionDao.getCoffeePortionsForUserInTime(2l,dt.minusYears(10),dt.plusYears(10));
+        assertEquals(0,count);
+    }
 }
