@@ -8,12 +8,18 @@ public class Coffee implements Entity {
     public static final String[] COLUMNS=  {"id","name","price"};
     public static final String TABLE_NAME = "COFFEES";
 
-    private int id;
+    private long id;
     private String name;
     private float price;
 
+    public Coffee(){}
 
-    public int getId() {
+    public Coffee(String name, float price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -27,9 +33,10 @@ public class Coffee implements Entity {
         return Coffee.COLUMNS;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
+
 
     public String getName() {
         return name;
@@ -56,15 +63,14 @@ public class Coffee implements Entity {
 
         if (id != coffee.id) return false;
         if (Float.compare(coffee.price, price) != 0) return false;
-        if (name != null ? !name.equals(coffee.name) : coffee.name != null)
-            return false;
+        if (name != null ? !name.equals(coffee.name) : coffee.name != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
         return result;

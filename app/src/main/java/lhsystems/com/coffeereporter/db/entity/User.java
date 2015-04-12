@@ -5,7 +5,7 @@ public class User implements Entity  {
     public static final String[] COLUMNS=  {"id","firstName","lastName","email","code"};
     public static final String TABLE_NAME = "USERS";
 
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,11 +19,11 @@ public class User implements Entity  {
         this.code = code;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -71,7 +71,7 @@ public class User implements Entity  {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);

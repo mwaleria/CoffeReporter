@@ -5,7 +5,8 @@ package lhsystems.com.coffeereporter.db.entity;
  */
 public interface Entity {
 
-    public int getId();
+    public long getId();
+    public void setId(long id);
     public String getTableName();
     public String[] getColumns();
 }

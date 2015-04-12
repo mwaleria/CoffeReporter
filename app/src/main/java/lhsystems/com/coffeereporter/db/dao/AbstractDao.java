@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lhsystems.com.coffeereporter.db.entity.Entity;
-import lhsystems.com.coffeereporter.db.entity.User;
 
 /**
  * Created by Marcin on 2015-03-31.
@@ -51,7 +50,8 @@ public abstract class AbstractDao<T extends Entity> extends SQLiteOpenHelper imp
     public T create(T entity) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = this.entityToContentValues(entity);
-        db.insert(fakeEntity.getTableName(),null,values);
+        long id = db.insert(fakeEntity.getTableName(),null,values);
+        entity.setId(id);
         return  entity;
     }
 
